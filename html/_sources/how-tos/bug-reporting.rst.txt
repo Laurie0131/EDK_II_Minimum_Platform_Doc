@@ -1,0 +1,22 @@
+.. _bug-reporting:
+
+Reporting Bugs
+===============
+|PROJ| uses the Tianocore Bugzilla bug tracking system. General details can be found on the |EdkiiIssuesWiki|.
+In particular, pay attention to the latest instructions for reporting security issues.
+
+.. |EdkiiIssuesWiki| raw:: html
+
+   <a href="https://github.com/tianocore/tianocore.github.io/wiki/Reporting-Issues" target="_blank">EDK II Reporting Issues wiki</a>
+
+Filing an edk2-platforms Bug
+-----------------------------
+1. Make an account
+2. Visit the Tianocore Bugzilla homepage and click "File a Bug"
+3. Select the "EDK2 Platforms" product
+4. In the Component field select the package that the bug is being filed against
+5. In the Description field, please clearly describe the problem. Indicate if it is a regression and clearly describe
+   how to reproduce the problem.
+6. Fill in the other fields as appropriate. Fields with a red asterisk are required.
+7. An owner should be assigned. If you are not sure who the best owner is, please make the owner
+   a package maintainer and enter all other maintainer emails into the CC field.

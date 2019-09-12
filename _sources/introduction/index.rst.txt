@@ -1,0 +1,154 @@
+.. _intro :
+
+Introduction
+=============
+
+Firmware plays a critical role in an overall computer system. Due to the complexity of modern computers, firmware is
+responsible for intializing increasingly complex hardware with contributions from an increasing number of vendors.
+
+|PROJ| is intended to break this complexity down into manageable pieces with well-defined responsibilities such that
+a firmware for today's complex computer systems can be built with consistency and simplicity.
+
+Due to the early execution of firmware, it is responsible for:
+
+* **Hardware initialization**
+* **Boot flow handoff to an operating system**
+* Platform resiliency - The ability to preserve boot capability and gracefully handle failures.
+* Platform stability - Configuring the platform such that it is stable.
+* Platform security - Initialize hardware security features, implement firmware security features, and be written
+  following industry security best practices.
+
+Design Philosophy
+-------------------
+|PROJ| is designed to serve today's firmware delivery model in which firmware are typically constructed
+from a mix of open and closed source modules with an emphasis on converging common platform code responsibilities
+between implementations in open source. Specifically, |PROJ| is designed to meet the following objectives:
+
+1. Define a structure that enables developers to consistently navigate source code, execution flow, and the functional
+   results of bootstrapping a system.
+2. Enable a minimal platform where minimal is defined as the minimal firmware implementation required to produce a
+   basic solution that can be further extended to meet a multitude of client, server, and embedded market needs.
+3. Minimize coupling between common, silicon, platform, and board packages.
+4. Enable large granularity binary solutions.
+
+Frequently Asked Questions
+---------------------------
+
+What is |PROJ|?
+    |PROJ| is a software architecture that describes how to build firmware that is:
+
+    * *Consistent* - Predictable boot flow with minimal arbitrary deviation in implementation.
+    * *Extensible & Minimal* - A minimal baseline with only essential functionality open to simple extension.
+    * *Modular* - Easy to re-use firmware code across products and debug, modify, and understand.
+    * *Scalable* - Applies to small embedded systems to multi-socket servers across the platform development
+                   lifecycle from pre-silicon work to product derivatives.
+
+    The software architecture is implemented in the edk2-platforms Git repository. The implementation consists of the
+    following pieces:
+
+    1. The Minimum Platform package (MinPlatformPkg) - A common set of platform boot flow code that implements the
+       |PROJSPEC|. The code in this package depends upon a set of board APIs. For example, the flow in MinPlatformPkg
+       may request that the board perform  GPIO initialization. The board package is responsible for implementing the
+       board-specific detection routine.
+    2. Board package - Board-specific code that implements the board APIs described in the |PROJSPEC|.
+
+What platforms are supported by |PROJ|?
+    The platforms supported by |PROJ| are quickly growing! Because firmware is board-specific, each motherboard must
+    have compatibility listed. The latest supported boards are listed in the
+    :projreadme:`Readme.md <edk-ii-minimum-platform-firmware-for-intel-platforms>`.
+
+What license does |PROJ| use?
+    |PROJ| is released under a BSD-2-Clause Plus Patent |License|.
+
+.. |License| raw:: html
+
+   <a href="https://github.com/tianocore/edk2-platforms/blob/master/License.txt" target="_blank">License</a>
+
+Who are the maintainers of |PROJ|?
+    Intel maintains the open source code on GitHub. Individual code maintainers are listed in |Maintainers.txt|_.
+
+What are options to debug |PROJ|?
+    |PROJ| supports a variety of debugging techniques. The exact debug capability depends upon the particular
+    board being debugged. In general, the following are some common techniques used for enabling new platforms:
+
+    * Debug message serial UART output
+    * Main memory (DRAM) debug buffer
+    * POST code output
+    * Source level debugging (e.g. using the Intel UEFI Development Kit (UDK) tool via UART or USB3
+
+    For closed chassis systems whose I/O options for firmware debug are particularly limited, the following
+    drivers have been developed:
+
+    1. HDMI debug output. Debug messages are sent over the I2C pins that are traditionally
+       used to send Extended Display Identification Data (EDID) to a monitor.
+    2. SPI flash writeback debug output. Debug messages in a ring buffer fashion to a small area on the SPI flash.
+       The messages be read back using a flash programmer after the system is powered off.
+
+Is Embedded Controller (EC) supported?
+    No. Different boards may have different EC or SuperIO. Developers need implement the code for the target board.
+
+What operating systems are supported?
+    As a UEFI compliant firmware, in general, operating systems that support UEFI are supported. However, hardware
+    initialization and handoff can vary across operating systems so each board firmware should explicitly mention
+    which operating systems are supported by that board firmware.
+
+What tool chains are supported to compile |PROJ|?
+    |PROJ| supports Microsoft Visual Studio 2015 and GNU GCC toolchains (gcc 5 or newer). Additional tools including
+     Python (3.7), nasm, and IASL are required to build |PROJ|.
+
+    Additional instructions for building the EDK II open source project are described in |Edk2GettingStarted|.
+
+.. |Edk2GettingStarted| raw:: html
+
+    <a href="https://github.com/tianocore/tianocore.github.io/wiki/Getting-Started-with-EDK-II">Getting Started with EDK II</a>
+
+Does |PROJ| support verified boot?
+    Not at this time. As verified boot is not considered essential for basic boot to an operating system, it is
+    considered an "advanced feature" in the Minimum Platform architecture. This advanced feature has not been created
+    and fully tested yet.
+
+    This feature was not prioritized in the initial set of advanced feature deployment as most users creating firmware
+    for their motherboard using Minimum Platform do not have access to the OEM signing key such that their firmware can
+    be verified.
+
+    The feature is planned for the future.
+
+Does |PROJ| support measured boot?
+    Not at this time. As measured boot is not considered essential for basic boot to an operating system, it is
+    considered an "advanced feature" in the Minimum Platform architecture. This advanced feature has not been created
+    and fully tested yet.
+
+    This feature was not prioritized in the initial set of advanced feature deployment to focus on base functionality
+    and features that can help users more easily build and debug firmware for their motherboards.
+
+    The feature is planned for the future.
+
+Does |PROJ| support SMM?
+    |PROJ| does support SMM. For some UEFI features on x86 architecture such as UEFI variables, SMM is considered a key
+    security technology to provide a ubiquitous isolated execution environment within the architecture.
+
+Does |PROJ| support splash screen?
+    Yes. By default, the TianoCore project splash screen is typically displayed. This can be configured and enabled or
+    disabled based on platform performance requirements.
+
+Does |PROJ| support legacy boot?
+    |PROJ| currently does not support option ROM or CSM mode.
+
+    There are no plans to support CSM mode in the Intel open source platforms.
+
+Do you have a porting guide for new boards?
+    This is a work-in-progress. Please check :ref:`board-porting` for updates.
+
+I need help...
+    This project uses the |EDK II mailing list|_ (|EDK II mailing list archive|_).
+    Subscribe to the mailing list. First search this documentation and the mailing list to check if your issue has
+    already been raised. If not, please following the mailing list instructions to ask a question for a community
+    member to help you.
+
+It doesn't work for me...
+    Email us via our mailing list or direclty submit an issue on |TianoCore Bugzilla|_.
+    For more information, about how to use the Bugzilla, check :ref:`bug-reporting`.
+
+I want to contribute...
+    You are welcome to contribute our project in different ways including code, documentation or ideas. We'd be
+    happy to review your contributions! For instructions to submit, please read through :ref:`code-contribution`.

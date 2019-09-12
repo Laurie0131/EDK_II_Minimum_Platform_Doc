@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; Minimum Platform  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Board Porting" href="../board-porting/index.html" />
+    <link rel="prev" title="EDK II Minimum Platform Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Minimum Platform
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#design-philosophy">Design Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../board-porting/index.html">Board Porting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/index.html">How To Guides</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Minimum Platform</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/introduction/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<span id="intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Firmware plays a critical role in an overall computer system. Due to the complexity of modern computers, firmware is
+responsible for intializing increasingly complex hardware with contributions from an increasing number of vendors.</p>
+<p>EDK II Minimum Platform is intended to break this complexity down into manageable pieces with well-defined responsibilities such that
+a firmware for today’s complex computer systems can be built with consistency and simplicity.</p>
+<p>Due to the early execution of firmware, it is responsible for:</p>
+<ul class="simple">
+<li><strong>Hardware initialization</strong></li>
+<li><strong>Boot flow handoff to an operating system</strong></li>
+<li>Platform resiliency - The ability to preserve boot capability and gracefully handle failures.</li>
+<li>Platform stability - Configuring the platform such that it is stable.</li>
+<li>Platform security - Initialize hardware security features, implement firmware security features, and be written
+following industry security best practices.</li>
+</ul>
+<div class="section" id="design-philosophy">
+<h2>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permalink to this headline">¶</a></h2>
+<p>EDK II Minimum Platform is designed to serve today’s firmware delivery model in which firmware are typically constructed
+from a mix of open and closed source modules with an emphasis on converging common platform code responsibilities
+between implementations in open source. Specifically, EDK II Minimum Platform is designed to meet the following objectives:</p>
+<ol class="arabic simple">
+<li>Define a structure that enables developers to consistently navigate source code, execution flow, and the functional
+results of bootstrapping a system.</li>
+<li>Enable a minimal platform where minimal is defined as the minimal firmware implementation required to produce a
+basic solution that can be further extended to meet a multitude of client, server, and embedded market needs.</li>
+<li>Minimize coupling between common, silicon, platform, and board packages.</li>
+<li>Enable large granularity binary solutions.</li>
+</ol>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>What is EDK II Minimum Platform?</dt>
+<dd><p class="first">EDK II Minimum Platform is a software architecture that describes how to build firmware that is:</p>
+<ul class="simple">
+<li><em>Consistent</em> - Predictable boot flow with minimal arbitrary deviation in implementation.</li>
+<li><em>Extensible &amp; Minimal</em> - A minimal baseline with only essential functionality open to simple extension.</li>
+<li><em>Modular</em> - Easy to re-use firmware code across products and debug, modify, and understand.</li>
+<li><dl class="first docutils">
+<dt><em>Scalable</em> - Applies to small embedded systems to multi-socket servers across the platform development</dt>
+<dd>lifecycle from pre-silicon work to product derivatives.</dd>
+</dl>
+</li>
+</ul>
+<p>The software architecture is implemented in the edk2-platforms Git repository. The implementation consists of the
+following pieces:</p>
+<ol class="last arabic simple">
+<li>The Minimum Platform package (MinPlatformPkg) - A common set of platform boot flow code that implements the
+EDK II Minimum Platform Specification. The code in this package depends upon a set of board APIs. For example, the flow in MinPlatformPkg
+may request that the board perform  GPIO initialization. The board package is responsible for implementing the
+board-specific detection routine.</li>
+<li>Board package - Board-specific code that implements the board APIs described in the EDK II Minimum Platform Specification.</li>
+</ol>
+</dd>
+<dt>What platforms are supported by EDK II Minimum Platform?</dt>
+<dd>The platforms supported by EDK II Minimum Platform are quickly growing! Because firmware is board-specific, each motherboard must
+have compatibility listed. The latest supported boards are listed in the
+<a class="reference external" href="https://github.com/tianocore/edk2-platforms/blob/master/Platform/Intel/Readme.md#edk-ii-minimum-platform-firmware-for-intel-platforms">Readme.md</a>.</dd>
+<dt>What license does EDK II Minimum Platform use?</dt>
+<dd>EDK II Minimum Platform is released under a BSD-2-Clause Plus Patent <a href="https://github.com/tianocore/edk2-platforms/blob/master/License.txt" target="_blank">License</a>.</dd>
+</dl>
+<dl class="docutils">
+<dt>Who are the maintainers of EDK II Minimum Platform?</dt>
+<dd>Intel maintains the open source code on GitHub. Individual code maintainers are listed in <a class="reference external" href="https://github.com/tianocore/edk2-platforms/blob/master/Maintainers.txt">Maintainers.txt</a>.</dd>
+<dt>What are options to debug EDK II Minimum Platform?</dt>
+<dd><p class="first">EDK II Minimum Platform supports a variety of debugging techniques. The exact debug capability depends upon the particular
+board being debugged. In general, the following are some common techniques used for enabling new platforms:</p>
+<ul class="simple">
+<li>Debug message serial UART output</li>
+<li>Main memory (DRAM) debug buffer</li>
+<li>POST code output</li>
+<li>Source level debugging (e.g. using the Intel UEFI Development Kit (UDK) tool via UART or USB3</li>
+</ul>
+<p>For closed chassis systems whose I/O options for firmware debug are particularly limited, the following
+drivers have been developed:</p>
+<ol class="last arabic simple">
+<li>HDMI debug output. Debug messages are sent over the I2C pins that are traditionally
+used to send Extended Display Identification Data (EDID) to a monitor.</li>
+<li>SPI flash writeback debug output. Debug messages in a ring buffer fashion to a small area on the SPI flash.
+The messages be read back using a flash programmer after the system is powered off.</li>
+</ol>
+</dd>
+<dt>Is Embedded Controller (EC) supported?</dt>
+<dd>No. Different boards may have different EC or SuperIO. Developers need implement the code for the target board.</dd>
+<dt>What operating systems are supported?</dt>
+<dd>As a UEFI compliant firmware, in general, operating systems that support UEFI are supported. However, hardware
+initialization and handoff can vary across operating systems so each board firmware should explicitly mention
+which operating systems are supported by that board firmware.</dd>
+<dt>What tool chains are supported to compile EDK II Minimum Platform?</dt>
+<dd><dl class="first docutils">
+<dt>EDK II Minimum Platform supports Microsoft Visual Studio 2015 and GNU GCC toolchains (gcc 5 or newer). Additional tools including</dt>
+<dd>Python (3.7), nasm, and IASL are required to build EDK II Minimum Platform.</dd>
+</dl>
+<p class="last">Additional instructions for building the EDK II open source project are described in <a href="https://github.com/tianocore/tianocore.github.io/wiki/Getting-Started-with-EDK-II">Getting Started with EDK II</a>.</p>
+</dd>
+</dl>
+<dl class="docutils">
+<dt>Does EDK II Minimum Platform support verified boot?</dt>
+<dd><p class="first">Not at this time. As verified boot is not considered essential for basic boot to an operating system, it is
+considered an “advanced feature” in the Minimum Platform architecture. This advanced feature has not been created
+and fully tested yet.</p>
+<p>This feature was not prioritized in the initial set of advanced feature deployment as most users creating firmware
+for their motherboard using Minimum Platform do not have access to the OEM signing key such that their firmware can
+be verified.</p>
+<p class="last">The feature is planned for the future.</p>
+</dd>
+<dt>Does EDK II Minimum Platform support measured boot?</dt>
+<dd><p class="first">Not at this time. As measured boot is not considered essential for basic boot to an operating system, it is
+considered an “advanced feature” in the Minimum Platform architecture. This advanced feature has not been created
+and fully tested yet.</p>
+<p>This feature was not prioritized in the initial set of advanced feature deployment to focus on base functionality
+and features that can help users more easily build and debug firmware for their motherboards.</p>
+<p class="last">The feature is planned for the future.</p>
+</dd>
+<dt>Does EDK II Minimum Platform support SMM?</dt>
+<dd>EDK II Minimum Platform does support SMM. For some UEFI features on x86 architecture such as UEFI variables, SMM is considered a key
+security technology to provide a ubiquitous isolated execution environment within the architecture.</dd>
+<dt>Does EDK II Minimum Platform support splash screen?</dt>
+<dd>Yes. By default, the TianoCore project splash screen is typically displayed. This can be configured and enabled or
+disabled based on platform performance requirements.</dd>
+<dt>Does EDK II Minimum Platform support legacy boot?</dt>
+<dd><p class="first">EDK II Minimum Platform currently does not support option ROM or CSM mode.</p>
+<p class="last">There are no plans to support CSM mode in the Intel open source platforms.</p>
+</dd>
+<dt>Do you have a porting guide for new boards?</dt>
+<dd>This is a work-in-progress. Please check <a class="reference internal" href="../board-porting/index.html#board-porting"><span class="std std-ref">Board Porting</span></a> for updates.</dd>
+<dt>I need help…</dt>
+<dd>This project uses the <a class="reference external" href="https://edk2.groups.io/g/devel/">EDK II mailing list</a> (<a class="reference external" href="https://lists.01.org/pipermail/edk2-devel/">EDK II mailing list archive</a>).
+Subscribe to the mailing list. First search this documentation and the mailing list to check if your issue has
+already been raised. If not, please following the mailing list instructions to ask a question for a community
+member to help you.</dd>
+<dt>It doesn’t work for me…</dt>
+<dd>Email us via our mailing list or direclty submit an issue on <a class="reference external" href="https://bugzilla.tianocore.org/">TianoCore Bugzilla</a>.
+For more information, about how to use the Bugzilla, check <a class="reference internal" href="../how-tos/bug-reporting.html#bug-reporting"><span class="std std-ref">Reporting Bugs</span></a>.</dd>
+<dt>I want to contribute…</dt>
+<dd>You are welcome to contribute our project in different ways including code, documentation or ideas. We’d be
+happy to review your contributions! For instructions to submit, please read through <a class="reference internal" href="../how-tos/code-contribution.html#code-contribution"><span class="std std-ref">Contributing Code</span></a>.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../board-porting/index.html" class="btn btn-neutral float-right" title="Board Porting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="EDK II Minimum Platform Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, TianoCore
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

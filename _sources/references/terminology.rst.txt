@@ -1,0 +1,47 @@
+Terminology and Acronyms
+==========================
+
+**ASL** ACPI Source Language
+
+**edk2** The tianocore.org git source code repository.
+
+**edk2-platforms** The tianocore.org platforms git source code repository.
+
+**EDK II** A cross-platform firmware development environment for the UEFI and PI specifications.
+
+**EDK II Minimum Platform** An EDK II compatible minimum and cross-platform code with a well-defined boot flow.
+
+**GPIO** General Purpose Input/Output
+
+**Green H** Allowed components to build portable UEFI & PI architecture components. APIs, standards, and libraries.
+
+**Intel&reg; FSP**
+  Intel&reg; Firmware Support Package. FSP is a binary image distributed by Intel to initialize main memory and chipset
+  for Intel SoCs. It provides a standardized API that boot loaders call into in order to initialize the silicon. These
+  APIs are required in order to boot an OS.
+
+  An FSP v2.0 compliant image consists of three subcomponents:
+
+  * FSP-T (**T**\ emporary Memory or Cache-As-RAM Initialization)
+  * FSP-M (**M**\ emory Initialization)
+  * FSP-S (**S**\ ilicon Initialization)
+
+**IFWI**
+  Integrated FirmWare Image. A complete flashable image including all required firmware ingredients to boot on
+  Intel platforms.
+
+**MPA** Minimum Platform Architecture
+
+**NASM** Assembler/Disassembler for Intel architecture.
+
+**Tiano** A UEFI implementation combining TianoCore with Intel's closed source platform and silicon modules.
+
+**TPM** Trsuted Platform Module
+
+**UDK** UEFI Development Kit
+
+**UEFI** Unified Extensible Firmware Interface
+
+**UEFI.org / UEFI Forum** An industry standards body
+
+**UEFI Platform Initialization (PI) specifications** Firmware construction specifications. Defines SEC, PEI, DXE, and BDS.

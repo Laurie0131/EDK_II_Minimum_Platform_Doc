@@ -1,0 +1,34 @@
+.. _code-contribution:
+
+Contributing Code
+==================
+
+Contribution Guidelines
+-----------------------
+
+As an open-source project, we welcome and encourage the community to
+submit patches directly to |PROJ|.
+
+Licensing
+*********
+
+|PROJ| project uses a BSD-2-Clause-Patent license, as found in the
+`LICENSE <https://github.com/slimbootloader/slimbootloader/blob/master/LICENSE>`__
+in the project's GitHub repo.
+
+It is important that the contributor fully understands the licensing terms and conditions
+and agrees to them.
+
+Coding Style
+************
+
+|PROJ| project follows the `EDKII coding guidelines <https://github.com/tianocore/tianocore.github.io/wiki/Code-Style-C>`__
+
+.. _Contribution workflow:
+
+Contribution Workflow
+*********************
+
+As part of the TianoCore project, the information availabe in the TianoCore wiki `How to Contribute <https://github.com/tianocore/tianocore.github.io/wiki/How-To-Contribute>`_.
+
+More information for working with git is available at `<https://guides.github.com/introduction/git-handbook/>`__
